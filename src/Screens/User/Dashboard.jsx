@@ -13,10 +13,10 @@ const Dashboard = () => {
   const userId = localStorage.getItem('user_id');
 
   const suggestions = [
-    "What's the weather today?",
-    "Tip: You can ask me to set reminders or find nearby restaurants",
-    "Type 'help' for a list of things I can assist you with",
-    "Quick commands: 'weather', 'news', 'jokes'",
+    "Find a good movie to watch tonight",
+    "Can you recommend a good book?",
+    "Type 'help' to see what I can do for you",
+    "How do I change my email preferences?",
   ];
 
   const scrollChat = () => {
@@ -32,8 +32,10 @@ const Dashboard = () => {
       const userInput = inputRef.current.value.trim();
       if (!userInput) return;
 
-      inputRef.current.value = "";
+      // Hide suggestions after the first user input
       setShowSuggestions(false);
+
+      inputRef.current.value = "";
       addMessage({ from: "user", text: userInput });
       setBotTyping(true);
 
@@ -89,7 +91,15 @@ const Dashboard = () => {
       console.error("Error fetching chat history:", error);
     }
   };
-  
+
+  const resetChat = () => {
+    setMessages([]);
+    setShowSuggestions(true);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+      inputRef.current.focus();
+    }
+  };
 
   useEffect(() => {
     fetchChatHistory();
@@ -165,7 +175,7 @@ const Dashboard = () => {
       </div>
       <div className="border-t-2 px-4 pt-1 mb-2 sm:mb-0">
         <div className="relative flex flex-col mt-4">
-          {showSuggestions && (
+          {showSuggestions && messages.length === 0 && (
             <div className="mb-6">
               <div className="no-opacity-scroll flex space-x-4 overflow-x-auto max-w-full scrollbar-hide p-4 rounded-lg shadow-inner">
                 {suggestions.map((suggestion, index) => (

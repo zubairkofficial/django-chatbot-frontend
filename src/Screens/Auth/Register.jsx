@@ -21,7 +21,7 @@ const Register = () => {
   const handleSignUp = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch(`${webURL}/auth/register`, {
+      const response = await fetch(`${webURL}auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
