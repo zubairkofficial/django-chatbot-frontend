@@ -1,0 +1,9 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.no-opacity-scroll::-webkit-scrollbar {
+    width: 0px; /* Width of the vertical scrollbar */
+    height: 0px; /* Height of the horizontal scrollbar */
+  }
