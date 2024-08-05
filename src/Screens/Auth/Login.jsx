@@ -42,6 +42,7 @@ const Login = () => {
       if (response.ok) {
         localStorage.setItem('token', data.token);
         localStorage.setItem('user_id', data.user.id);
+        localStorage.setItem("user_name",data.user.username);
         navigate("/user/dashboard");
       } else {
         toast.error(data.message || 'Login failed', {

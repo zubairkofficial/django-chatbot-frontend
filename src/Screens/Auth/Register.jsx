@@ -31,11 +31,9 @@ const Register = () => {
 
       const data = await response.json();
       if (response.ok) {
-        // Save token to local storage
         localStorage.setItem("token", data.token);
         localStorage.setItem("user_id", data.user.id);
-
-        // Show success toast
+        localStorage.setItem("user_name",data.username);
         toast.success("Sign-up successful!", {
           position: "top-right",
           autoClose: 5000,
@@ -45,8 +43,6 @@ const Register = () => {
           draggable: true,
           progress: undefined,
         });
-
-        // Navigate to dashboard
         navigate("/user/dashboard");
       } else {
         toast.error(data.message || "Sign-up failed", {
@@ -76,7 +72,6 @@ const Register = () => {
   };
 
   useEffect(() => {
-    // Simulating initial loading state
     setTimeout(() => {
       setLoading(false);
     }, 2000);
@@ -85,7 +80,6 @@ const Register = () => {
   return (
     <>
       {loading ? (
-        // Show loader while loading
         <div className="h-screen flex items-center justify-center">
           <PageLoader />
         </div>
@@ -112,7 +106,7 @@ const Register = () => {
                     <Form>
                       <div className="mb-4">
                         <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                          Email
+                          Email (abc@xyz.com)
                         </label>
                         <Field
                           type="text"
@@ -127,7 +121,7 @@ const Register = () => {
                       </div>
                       <div className="mb-4">
                         <label className="font-semibold text-sm text-gray-600 pb-1 block">
-                          Username
+                          Name (must me unique and withoutspace)
                         </label>
                         <Field
                           type="text"
